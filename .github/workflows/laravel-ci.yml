@@ -1,0 +1,28 @@
+name: Laravel CI
+on:
+  push:
+    branches: [ main, staging ]
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install composer dependencies
+        run: make setup
+      - name: Create temporary sqlite database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+      - name: Run unit tests via PHPUnit
+        run: make test
+      - name: Show test coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          XDEBUG_MODE: coverage
+        with:
+          coverageCommand: make test-coverage
+          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
+          debug: true
+      - name: Check lint via PHP CodeSniffer
+        run: make lint
