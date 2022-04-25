@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
+use Rollbar\Rollbar;
 
 class HomePageController extends Controller
 {
