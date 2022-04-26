@@ -36,7 +36,7 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link " href="#">
-                            Задачи                            </a>
+                            Задачи                           </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">
