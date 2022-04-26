@@ -25,7 +25,7 @@ return [
     'before' => ':attribute должен быть датой ранее :date.',
     'before_or_equal' => ':attribute должен быть датой ранее или равен :date.',
     'between' => [
-        'array' => ':attribute должен быть между :min и :max.',
+        'array' => ':attribute должен быть между :min и :max значений.',
         'file' => ':attribute должен быть между :min и :max килобайтов.',
         'numeric' => ':attribute должен быть между :min и :max.',
         'string' => ':attribute должен быть между :min и :max букв.',
