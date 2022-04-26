@@ -40,7 +40,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">
-                            Статусы                            </a>
+                            Статусы                           </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#">
