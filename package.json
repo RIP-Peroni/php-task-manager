@@ -15,9 +15,7 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "laravel-mix": "^6.0.6"
-    },
-    "devDependencies": {
+        "laravel-mix": "^6.0.6",
         "@popperjs/core": "^2.10.2",
         "axios": "^0.25",
         "bootstrap": "^5.1.3",
