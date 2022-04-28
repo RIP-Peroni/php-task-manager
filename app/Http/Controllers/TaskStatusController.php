@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TaskStatusController extends Controller
 {
@@ -25,7 +26,7 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -70,7 +71,9 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
+        if (Gate::denies('update-status', $taskStatus)) {
+            abort(403);
+        }
     }
 
     /**
@@ -81,6 +84,8 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        //
+        if (Gate::denies('delete-status', $taskStatus)) {
+            abort(403);
+        }
     }
 }
