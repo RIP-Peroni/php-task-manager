@@ -2,10 +2,6 @@
 
 @section('title', 'Менеджер задач')
 
-@if (Session::has('success'))
-    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
-@endif
-
 @section('content')
     <div class="p-5 mb-4 bg-light border rounded-3">
         <div class="container-fluid py-5">
