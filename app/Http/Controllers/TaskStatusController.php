@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
 {
@@ -26,7 +27,9 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-
+        if (!Auth::check()) {
+            abort(403);
+        }
     }
 
     /**
@@ -59,7 +62,9 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
-        //
+        if (!Auth::check()) {
+            abort(403);
+        }
     }
 
     /**
@@ -71,7 +76,7 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        if (Gate::denies('update-status', $taskStatus)) {
+        if (!Auth::check()) {
             abort(403);
         }
     }
@@ -80,12 +85,18 @@ class TaskStatusController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        if (Gate::denies('delete-status', $taskStatus)) {
-            abort(403);
-        }
+//        dd($taskStatus);
+//        if ($taskStatus->tasks()->exists()) {
+//            flash('Не удалось удалить статус')->error();
+//            return back();
+//        }
+        $taskStatus->delete();
+
+
+        return redirect()->route('task_statuses.index');
     }
 }

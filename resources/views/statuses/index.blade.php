@@ -11,6 +11,9 @@
                 <th>ID</th>
                 <th>Имя</th>
                 <th>Дата создания</th>
+                @if (Auth::check())
+                    <th>Действия</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -19,6 +22,13 @@
                     <td>{{ $status->id }}</td>
                     <td>{{ $status->name }}</td>
                     <td>{{ $status->created_at }}</td>
+{{--                    @if (Auth::check())--}}
+                        <td>
+{{--                            {{ link_to_route('task_statuses.destroy', 'Удалить', ['task_status' => $status], ['class' => 'text-danger text-decoration-none']) }}--}}
+                            <a href="{{ route('task_statuses.destroy', ['task_status' => $status]) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow" class="text-danger text-decoration-none">Удалить</a>
+                            {{ link_to_route('task_statuses.edit', 'Изменить', [$status->id], ['class' => 'text-decoration-none']) }}
+                        </td>
+{{--                    @endif--}}
                 </tr>
             @endforeach
         </tbody>
