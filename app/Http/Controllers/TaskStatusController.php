@@ -39,52 +39,46 @@ class TaskStatusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(TaskStatusRequest $request)
     {
         $data = $request->validated();
         TaskStatus::query()->create($data);
+        flash('Статус успешно создан')->success();
 
         return redirect(route('task_statuses.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TaskStatus $taskStatus)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(TaskStatus $taskStatus)
     {
         if (!Auth::check()) {
             abort(403);
         }
+        return view('statuses.update', compact('taskStatus'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @param TaskStatusRequest $request
+     * @param \App\Models\TaskStatus $taskStatus
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function update(TaskStatusRequest $request, TaskStatus $taskStatus)
     {
         if (!Auth::check()) {
             abort(403);
         }
+        $taskStatus->update($request->validated());
+        flash('Статус успешно обновлён')->success();
+        return redirect(route('task_statuses.index'));
     }
 
     /**
@@ -101,7 +95,7 @@ class TaskStatusController extends Controller
 //            return back();
 //        }
         $taskStatus->delete();
-
+        flash('Статус успешно удалён')->success();
 
         return redirect()->route('task_statuses.index');
     }

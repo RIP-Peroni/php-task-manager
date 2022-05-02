@@ -4,10 +4,7 @@
 @section('content')
 
     {{ Form::model($status, ['route' => 'task_statuses.store', 'class' => 'w-50']) }}
-        <div class="form-group mb-3">
-            {{ Form::label('name', 'Имя') }}
-            {{ Form::text('name', null, ['class' => 'form-control']) }}
-        </div>
+        @include('statuses.form')
         {{ Form::submit('Создать', ['class' => 'btn btn-primary mt-3']) }}
     {{ Form::close() }}
 
