@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskStatusRequest;
 use App\Models\TaskStatus;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,13 +24,15 @@ class TaskStatusController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         if (!Auth::check()) {
             abort(403);
         }
+        $status = new TaskStatus();
+        return view('statuses.create', compact('status'));
     }
 
     /**
@@ -38,9 +41,12 @@ class TaskStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskStatusRequest $request)
     {
-        //
+        $data = $request->validated();
+        TaskStatus::query()->create($data);
+
+        return redirect(route('task_statuses.index'));
     }
 
     /**
