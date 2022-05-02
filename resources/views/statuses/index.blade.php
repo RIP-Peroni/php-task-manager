@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
+@section('header', 'Статусы')
 @section('content')
-    <h1 class="mb-5">Статусы</h1>
     @if (Auth::check())
         {{ link_to_route('task_statuses.create', 'Создать статус', [], ['class' => 'btn btn-primary']) }}
     @endif
@@ -22,13 +22,13 @@
                     <td>{{ $status->id }}</td>
                     <td>{{ $status->name }}</td>
                     <td>{{ $status->created_at }}</td>
-{{--                    @if (Auth::check())--}}
+                    @if (Auth::check())
                         <td>
-{{--                            {{ link_to_route('task_statuses.destroy', 'Удалить', ['task_status' => $status], ['class' => 'text-danger text-decoration-none']) }}--}}
-                            <a href="{{ route('task_statuses.destroy', ['task_status' => $status]) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow" class="text-danger text-decoration-none">Удалить</a>
+                            {{ link_to_route('task_statuses.destroy', 'Удалить', ['task_status' => $status],
+                                ['class' => 'text-danger text-decoration-none', 'data-confirm' => 'Вы уверены?', 'data-method' => "delete", 'rel' => "nofollow"]) }}
                             {{ link_to_route('task_statuses.edit', 'Изменить', [$status->id], ['class' => 'text-decoration-none']) }}
                         </td>
-{{--                    @endif--}}
+                    @endif
                 </tr>
             @endforeach
         </tbody>
