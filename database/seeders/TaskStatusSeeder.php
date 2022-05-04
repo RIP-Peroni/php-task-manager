@@ -12,7 +12,7 @@ class TaskStatusSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         \App\Models\TaskStatus::factory(1)->create(['name' => 'новый']);
         \App\Models\TaskStatus::factory(1)->create(['name' => 'в работе']);
