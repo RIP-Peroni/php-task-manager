@@ -34,9 +34,13 @@
 {{--                    todo добавить ограничение - можно удалить только если создавал сам залогиненный пользователь--}}
                     @if (Auth::check())
                         <td>
+                            @can('delete', $task)
                             {{ link_to_route('tasks.destroy', 'Удалить', ['task' => $task],
                                 ['class' => 'text-danger text-decoration-none', 'data-confirm' => 'Вы уверены?', 'data-method' => "delete", 'rel' => "nofollow"]) }}
+                            @endcan
+                            @can('update', $task)
                             {{ link_to_route('tasks.edit', 'Изменить', [$task->id], ['class' => 'text-decoration-none']) }}
+                            @endcan
                         </td>
                     @endif
                 </tr>
