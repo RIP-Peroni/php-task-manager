@@ -102,9 +102,6 @@
             @endif
             @include('flash::message')
 
-            <h1 class="mb-5">
-                @yield('header')
-            </h1>
             @yield('content')
         </main>
     </div>

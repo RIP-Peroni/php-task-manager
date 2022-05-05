@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('header', 'Задачи')
 @section('content')
+    <h1 class="mb-5">Задачи</h1>
+
     @if (Auth::check())
         {{ link_to_route('tasks.create', 'Создать задачу', [], ['class' => 'btn btn-primary']) }}
     @endif
@@ -23,20 +24,19 @@
             @foreach($tasks as $task)
                 <tr>
                     <td>{{ $task->id }}</td>
-{{--                    todo статус--}}
-                    <td>статус</td>
-                    <td>{{ $task->name }}</td>
-                    {{--                    todo Автор--}}
-                    <td>Автор</td>
-                    {{--                    todo Исполнитель--}}
-                    <td>Исполнитель</td>
+                    <td>{{ $task->status->name }}</td>
+                    <td>
+                        <a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a>
+                    </td>
+                    <td>{{ $task->creator->name }}</td>
+                    <td>{{ $task->executor->name ?? null }}</td>
                     <td>{{ $task->created_at }}</td>
 {{--                    todo добавить ограничение - можно удалить только если создавал сам залогиненный пользователь--}}
                     @if (Auth::check())
                         <td>
-                            {{ link_to_route('task_statuses.destroy', 'Удалить', ['task_status' => $status],
+                            {{ link_to_route('tasks.destroy', 'Удалить', ['task' => $task],
                                 ['class' => 'text-danger text-decoration-none', 'data-confirm' => 'Вы уверены?', 'data-method' => "delete", 'rel' => "nofollow"]) }}
-                            {{ link_to_route('task_statuses.edit', 'Изменить', [$status->id], ['class' => 'text-decoration-none']) }}
+                            {{ link_to_route('tasks.edit', 'Изменить', [$task->id], ['class' => 'text-decoration-none']) }}
                         </td>
                     @endif
                 </tr>

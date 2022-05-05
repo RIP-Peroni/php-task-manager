@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskFormRequest;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -41,33 +42,50 @@ class TaskController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(TaskFormRequest $request)
     {
-        //
+        $user = Auth::user();
+        $data = $request->validated();
+        $task = $user->tasks()->make();
+        $task->fill($data)->save();
+
+        flash('Задача успешно создана')->success();
+
+        return redirect(route('tasks.index'));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Task $task)
     {
-        //
+        if (!Auth::check()) {
+            abort(403);
+        }
+
+        return view('tasks.show', compact('task'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Task $task)
     {
-        //
+        if (!Auth::check()) {
+            abort(403);
+        }
+        $statuses = TaskStatus::query()->pluck('name', 'id');
+        $users = User::query()->pluck('name', 'id');
+
+        return view('tasks.update', compact('task', 'statuses', 'users'));
     }
 
     /**
@@ -75,21 +93,29 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskFormRequest $request, Task $task)
     {
-        //
+        if (!Auth::check()) {
+            abort(403);
+        }
+        $task->update($request->validated());
+        flash('Задача успешно обновлена')->success();
+        return redirect(route('tasks.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task): \Illuminate\Http\RedirectResponse
     {
-        //
+        $task->delete();
+        flash('Задача успешно удалена')->success();
+
+        return redirect()->route('tasks.index');
     }
 }

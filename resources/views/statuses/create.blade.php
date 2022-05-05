@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('header', 'Создать статус')
 @section('content')
+    <h1 class="mb-5">Создать статус</h1>
 
     {{ Form::model($status, ['route' => 'task_statuses.store', 'class' => 'w-50']) }}
         @include('statuses.form')

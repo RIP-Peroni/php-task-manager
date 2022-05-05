@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('header', 'Статусы')
 @section('content')
+    <h1 class="mb-5">Статусы</h1>
+
     @if (Auth::check())
         {{ link_to_route('task_statuses.create', 'Создать статус', [], ['class' => 'btn btn-primary']) }}
     @endif

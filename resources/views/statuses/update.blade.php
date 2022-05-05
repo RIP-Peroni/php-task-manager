@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('header', 'Создать статус')
 @section('content')
+    <h1 class="mb-5">Изменить статус</h1>
 
     {{ Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'patch', 'class' => 'w-50']) }}
         @include('statuses.form')

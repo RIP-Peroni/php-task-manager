@@ -89,11 +89,10 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-//        dd($taskStatus);
-//        if ($taskStatus->tasks()->exists()) {
-//            flash('Не удалось удалить статус')->error();
-//            return back();
-//        }
+        if ($taskStatus->tasks()->exists()) {
+            flash('Не удалось удалить статус')->error();
+            return back();
+        }
         $taskStatus->delete();
         flash('Статус успешно удалён')->success();
 
