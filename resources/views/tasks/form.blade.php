@@ -20,3 +20,10 @@
         null,
         ['placeholder' => '----------', 'class' => 'form-control']) }}
 </div>
+<div class="form-group mb-3">
+    {{ Form::label('label_id', 'Метки') }}<br>
+    {{ Form::select('label_id',
+        $labels,
+        $task->labels,
+        ['placeholder' => '', 'multiple' => 'multiple', 'name' => 'labels[]', 'class' => 'form-control']) }}
+</div>

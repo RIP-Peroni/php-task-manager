@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class TaskFormRequest extends FormRequest
+class LabelFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class TaskFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:2000', 'unique:tasks,name,' . $this->task->id],
+            'name' => ['required', 'unique:labels,name,' . $this->label->id],
             'description' => ['nullable', 'string'],
-            'status_id' => ['required'],
-            'assigned_to_id' => ['nullable', 'integer'],
-            'labels' => ['nullable', 'array']
         ];
     }
 }

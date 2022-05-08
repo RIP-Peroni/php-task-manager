@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskFormRequest;
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -35,7 +36,8 @@ class TaskController extends Controller
         $task = new Task();
         $statuses = TaskStatus::query()->pluck('name', 'id');
         $users = User::query()->pluck('name', 'id');
-        return view('tasks.create', compact('task', 'statuses', 'users'));
+        $labels = Label::query()->pluck('name', 'id');
+        return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -50,6 +52,8 @@ class TaskController extends Controller
         $data = $request->validated();
         $task = $user->tasks()->make();
         $task->fill($data)->save();
+        $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
+        $task->labels()->attach($labels);
 
         flash('Задача успешно создана')->success();
 
@@ -84,8 +88,9 @@ class TaskController extends Controller
         }
         $statuses = TaskStatus::query()->pluck('name', 'id');
         $users = User::query()->pluck('name', 'id');
+        $labels = Label::query()->pluck('name', 'id');
 
-        return view('tasks.update', compact('task', 'statuses', 'users'));
+        return view('tasks.update', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -101,6 +106,9 @@ class TaskController extends Controller
             abort(403);
         }
         $task->update($request->validated());
+        $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
+        $task->labels()->detach();
+        $task->labels()->attach($labels);
         flash('Задача успешно обновлена')->success();
         return redirect(route('tasks.index'));
     }

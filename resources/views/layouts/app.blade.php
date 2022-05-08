@@ -44,8 +44,8 @@
                                     {{ __('Statuses') }}                            </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">
-                                    {{ __('Marks') }}                            </a>
+                                <a class="nav-link " href="{{ route('labels.index') }}">
+                                    {{ __('Labels') }}                            </a>
                             </li>
                         </ul>
                     </ul>
