@@ -24,8 +24,13 @@ class LabelFormRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->routeIs('labels.update')) {
+            $nameRule = ['required', 'unique:labels,name,' . $this->label->id];
+        } else {
+            $nameRule = ['required', 'unique:labels'];
+        }
         return [
-            'name' => ['required', 'unique:labels,name,' . $this->label->id],
+            'name' => $nameRule,
             'description' => ['nullable', 'string'],
         ];
     }

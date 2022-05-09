@@ -24,8 +24,13 @@ class TaskFormRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->routeIs('tasks.update')) {
+            $nameRule = ['required', 'unique:tasks,name,' . $this->task->id];
+        } else {
+            $nameRule = ['required', 'unique:tasks'];
+        }
         return [
-            'name' => ['required', 'max:2000', 'unique:tasks,name,' . $this->task->id],
+            'name' => $nameRule,
             'description' => ['nullable', 'string'],
             'status_id' => ['required'],
             'assigned_to_id' => ['nullable', 'integer'],
