@@ -7,28 +7,46 @@ use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Request $request
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request): View|Factory|Application
     {
-        $tasks = Task::query()->orderBy('created_at')->get();
-        return view('tasks.index', compact('tasks'));
+        $statusesForFilter = TaskStatus::query()->pluck('name', 'id');
+        $usersForFilter = User::query()->pluck('name', 'id');
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id')
+            ])
+            ->orderBy('created_at')
+            ->paginate();
+        $filter = $request->filter ?? null;
+        return view('tasks.index', compact('tasks', 'statusesForFilter', 'usersForFilter', 'filter'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -43,10 +61,10 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param TaskFormRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(TaskFormRequest $request)
+    public function store(TaskFormRequest $request): Redirector|RedirectResponse|Application
     {
         $user = Auth::user();
         $data = $request->validated();
@@ -60,13 +78,13 @@ class TaskController extends Controller
         return redirect(route('tasks.index'));
     }
 
-    /**
+    /**taskformr
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Task $task
+     * @return Application|Factory|View
      */
-    public function show(Task $task)
+    public function show(Task $task): View|Factory|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -78,10 +96,10 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Task $task
+     * @return Application|Factory|View
      */
-    public function edit(Task $task)
+    public function edit(Task $task): View|Factory|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -96,11 +114,11 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param TaskFormRequest $request
+     * @param Task $task
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(TaskFormRequest $request, Task $task)
+    public function update(TaskFormRequest $request, Task $task): Redirector|RedirectResponse|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -116,10 +134,10 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Task $task
+     * @return RedirectResponse
      */
-    public function destroy(Task $task): \Illuminate\Http\RedirectResponse
+    public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
         flash('Задача успешно удалена')->success();
