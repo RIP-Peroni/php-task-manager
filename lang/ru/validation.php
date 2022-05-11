@@ -94,7 +94,7 @@ return [
         'array' => ':Attribute должен иметь минимум :min символов.',
         'file' => ':Attribute должен быть минимум :min килобайтов.',
         'numeric' => ':Attribute должен быть минимум :min.',
-        'string' => ':Attribute должен иметь длину минимум :min символов.',
+        'string' => ':Attribute должен иметь длину не менее :min символов.',
     ],
     'multiple_of' => ':Attribute должен быть кратным :value.',
     'not_in' => 'выбранный :Attribute не валиден.',
