@@ -12,9 +12,19 @@ class TaskFormRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return Auth::check();
+    }
+
+    public function messages(): array
+    {
+        return [
+            'unique' => __(
+                'validation.The attribute name has already been taken',
+                ['attribute' => 'task', 'атрибут' => 'задача']
+            ),
+        ];
     }
 
     /**
@@ -22,7 +32,7 @@ class TaskFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         if ($this->routeIs('tasks.update')) {
             $nameRule = ['required', 'unique:tasks,name,' . $this->task->id];

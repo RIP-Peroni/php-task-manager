@@ -12,9 +12,19 @@ class LabelFormRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return Auth::check();
+    }
+
+    public function messages(): array
+    {
+        return [
+            'unique' => __(
+                'validation.The attribute name has already been taken',
+                ['attribute' => 'label', 'атрибут' => 'метка']
+            ),
+        ];
     }
 
     /**
@@ -22,13 +32,11 @@ class LabelFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        if ($this->routeIs('labels.update')) {
-            $nameRule = ['required', 'unique:labels,name,' . $this->label->id];
-        } else {
-            $nameRule = ['required', 'unique:labels'];
-        }
+        $nameRule = $this->routeIs('labels.update')
+            ? ['required', 'unique:labels,name,' . $this->label->id]
+            : ['required', 'unique:labels'];
         return [
             'name' => $nameRule,
             'description' => ['nullable', 'string'],

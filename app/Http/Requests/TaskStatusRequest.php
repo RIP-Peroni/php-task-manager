@@ -17,6 +17,16 @@ class TaskStatusRequest extends FormRequest
         return Auth::check();
     }
 
+    public function messages(): array
+    {
+        return [
+            'unique' => __(
+                'validation.The attribute name has already been taken',
+                ['attribute' => 'status', 'атрибут' => 'статус']
+            ),
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

@@ -18,6 +18,7 @@ return [
     'Name' => 'Имя',
     'Description' => 'Описание',
     'Labels' => 'Метки',
+    'Label' => 'Метка',
     'Date of creation' => 'Дата создания',
     'Actions' => 'Действия',
     'Delete' => 'Удалить',

@@ -128,6 +128,10 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'The attribute name has already been taken' => 'The :attribute name has already been taken',
+
+
+
 
     /*
     |--------------------------------------------------------------------------
