@@ -73,7 +73,7 @@ class TaskController extends Controller
         $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
         $task->labels()->attach($labels);
 
-        flash('Задача успешно создана')->success();
+        flash(__('tasks.Task created successfully'))->success();
 
         return redirect(route('tasks.index'));
     }
@@ -127,7 +127,7 @@ class TaskController extends Controller
         $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
         $task->labels()->detach();
         $task->labels()->attach($labels);
-        flash('Задача успешно обновлена')->success();
+        flash(__('tasks.Task changed successfully'))->success();
         return redirect(route('tasks.index'));
     }
 
@@ -140,7 +140,7 @@ class TaskController extends Controller
     public function destroy(Task $task): RedirectResponse
     {
         $task->delete();
-        flash('Задача успешно удалена')->success();
+        flash(__('tasks.Task deleted successfully'))->success();
 
         return redirect()->route('tasks.index');
     }

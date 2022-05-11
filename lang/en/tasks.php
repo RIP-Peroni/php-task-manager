@@ -30,4 +30,7 @@ return [
     'Task view' => 'Task view',
     'Changing a task' => 'Changing a task',
     'Update' => 'Update',
+    'Task created successfully' => 'Задача успешно создана',
+    'Task changed successfully' => 'Задача успешно обновлена',
+    'Task deleted successfully' => 'Задача успешно удалена'
 ];

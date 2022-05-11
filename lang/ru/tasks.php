@@ -24,10 +24,14 @@ return [
     'Actions' => 'Действия',
     'Are you sure?' => 'Вы уверены?',
     'Edit' => 'Изменить',
+    'Delete' => 'Удалить',
     'Create' => 'Создать',
     'Description' => 'Описание',
     'Labels' => 'Метки',
     'Task view' => 'Просмотр задачи',
     'Changing a task' => 'Изменение задачи',
     'Update' => 'Обновить',
+    'Task created successfully' => 'Задача успешно создана',
+    'Task changed successfully' => 'Задача успешно обновлена',
+    'Task deleted successfully' => 'Задача успешно удалена'
 ];
