@@ -70,7 +70,7 @@ class TaskControllerTest extends TestCase
     {
         $task = Task::factory()->create();
         $changedData = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
-        $responseWithoutAuth = $this->get(route('tasks.update', ['task' => $task]), $changedData);
+        $responseWithoutAuth = $this->patch(route('tasks.update', ['task' => $task]), $changedData);
         $responseWithoutAuth->assertStatus(403);
         $response = $this
             ->actingAs($this->user)
