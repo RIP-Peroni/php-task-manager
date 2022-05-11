@@ -24,5 +24,9 @@ return [
     'Edit' => 'Изменить',
     'Are you sure?' => 'Вы уверены?',
     'Update label' => 'Обновить метку',
-    'Update' => 'Обновить'
+    'Update' => 'Обновить',
+    'Label created successfully' => 'Метка успешно создана',
+    'Label changed successfully' => 'Метка успешно обновлена',
+    'Failed to delete label' => 'Не удалось удалить метку',
+    'Label deleted successfully' => 'Метка успешно удалена',
 ];

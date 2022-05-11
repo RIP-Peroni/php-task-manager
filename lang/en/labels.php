@@ -24,5 +24,9 @@ return [
     'Edit' => 'Edit',
     'Are you sure?' => 'Are you sure?',
     'Update label' => 'Update label',
-    'Update' => 'Update'
+    'Update' => 'Update',
+    'Label created successfully' => 'Label created successfully',
+    'Label changed successfully' => 'Label changed successfully',
+    'Failed to delete label' => 'Failed to delete label',
+    'Label deleted successfully' => 'Label deleted successfully',
 ];

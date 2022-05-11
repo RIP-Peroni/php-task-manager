@@ -44,7 +44,7 @@ class LabelController extends Controller
     {
         $data = $request->validated();
         Label::query()->create($data);
-        flash('Метка успешно создана')->success();
+        flash(__('labels.Label created successfully'))->success();
 
         return redirect(route('labels.index'));
     }
@@ -76,7 +76,7 @@ class LabelController extends Controller
             abort(403);
         }
         $label->update($request->validated());
-        flash('Метка успешно обновлена')->success();
+        flash(__('labels.Label changed successfully'))->success();
         return redirect(route('labels.index'));
     }
 
@@ -89,11 +89,11 @@ class LabelController extends Controller
     public function destroy(Label $label)
     {
         if ($label->tasks()->exists()) {
-            flash('Не удалось удалить метку')->error();
+            flash(__('labels.Failed to delete label'))->error();
             return back();
         }
         $label->delete();
-        flash('Метка успешно удалена')->success();
+        flash(__('labels.Label deleted successfully'))->success();
 
         return redirect()->route('labels.index');
     }
