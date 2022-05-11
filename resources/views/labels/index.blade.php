@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-5">Метки</h1>
+    <h1 class="mb-5">{{ __('labels.Labels') }}</h1>
 
     @if (Auth::check())
-        {{ link_to_route('labels.create', 'Создать метку', [], ['class' => 'btn btn-primary']) }}
+        {{ link_to_route('labels.create', __('labels.Create label'), [], ['class' => 'btn btn-primary']) }}
     @endif
     <table class="table mt-2">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Имя</th>
-                <th>Описание</th>
-                <th>Дата создания</th>
+                <th>{{ __('labels.Name') }}</th>
+                <th>{{ __('labels.Description') }}</th>
+                <th>{{ __('labels.Date of creation') }}</th>
                 @if (Auth::check())
-                    <th>Действия</th>
+                    <th>{{ __('labels.Actions') }}</th>
                 @endif
             </tr>
         </thead>
@@ -27,9 +27,9 @@
                     <td>{{ $label->created_at }}</td>
                     @if (Auth::check())
                         <td>
-                            {{ link_to_route('labels.destroy', 'Удалить', ['label' => $label],
-                                ['class' => 'text-danger text-decoration-none', 'data-confirm' => 'Вы уверены?', 'data-method' => "delete", 'rel' => "nofollow"]) }}
-                            {{ link_to_route('labels.edit', 'Изменить', [$label->id], ['class' => 'text-decoration-none']) }}
+                            {{ link_to_route('labels.destroy', __('labels.Delete'), ['label' => $label],
+                                ['class' => 'text-danger text-decoration-none', 'data-confirm' => __('labels.Are you sure?'), 'data-method' => "delete", 'rel' => "nofollow"]) }}
+                            {{ link_to_route('labels.edit', __('labels.Edit'), [$label->id], ['class' => 'text-decoration-none']) }}
                         </td>
                     @endif
                 </tr>

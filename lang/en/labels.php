@@ -13,9 +13,16 @@ return [
     |
     */
 
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have emailed your password reset link!',
-    'throttled' => 'Please wait before retrying.',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that email address.",
+    'Create label' => 'Create label',
+    'Create' => 'Create',
+    'Name' => 'Name',
+    'Description' => 'Description',
+    'Labels' => 'Labels',
+    'Date of creation' => 'Date of creation',
+    'Actions' => 'Actions',
+    'Delete' => 'Delete',
+    'Edit' => 'Edit',
+    'Are you sure?' => 'Are you sure?',
+    'Update label' => 'Update label',
+    'Update' => 'Update'
 ];

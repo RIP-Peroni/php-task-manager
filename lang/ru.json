@@ -5,17 +5,7 @@
     "The :attribute must contain at least one uppercase and one lowercase letter.": ":attribute должен содержать минимум одну букву в верхнем регистре и минимум одну букву в нижнем регистре.",
     "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "Введенный :attribute был скомпрометирован после утечки данных. Пожалуйста, выберите другой :attribute.",
     "Task Manager": "Менеджер задач",
-    "Email Address": "Email",
-    "Name": "Имя",
-    "Password": "Пароль",
-    "Confirm Password": "Подтверждение",
-    "Login": "Вход",
-    "Register": "Регистрация",
-    "Register now": "Зарегистрировать",
-    "Remember Me": "Запомнить меня",
-    "Forgot Your Password?": "Забыли свой пароль?",
     "Tasks": "Задачи",
     "Statuses": "Статусы",
-    "Labels": "Метки",
-    "Logout": "Выход"
+    "Labels": "Метки"
 }
