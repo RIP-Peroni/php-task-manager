@@ -40,3 +40,6 @@ setup:
 
 test-coverage:
 	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+
+phpstan:
+	composer exec phpstan analyse app tests
