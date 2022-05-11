@@ -37,15 +37,15 @@
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ route('tasks.index') }}">
-                                    {{ __('Tasks') }}                            </a>
+                                    {{ __('tasks.Tasks') }}                            </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ route('task_statuses.index') }}">
-                                    {{ __('Statuses') }}                            </a>
+                                    {{ __('statuses.Statuses') }}                            </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ route('labels.index') }}">
-                                    {{ __('Labels') }}                            </a>
+                                    {{ __('labels.Labels') }}                            </a>
                             </li>
                         </ul>
                     </ul>
@@ -75,7 +75,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('auth.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
