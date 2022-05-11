@@ -24,4 +24,8 @@ return [
     'Edit' => 'Изменить',
     'Are you sure?' => 'Вы уверены?',
     'Edit status' => 'Изменить статус',
+    'Status created successfully' => 'Статус успешно создан',
+    'Status changed successfully' => 'Статус успешно изменён',
+    'Status deleted successfully' => 'Статус успешно удалён',
+    'Failed to delete status' => 'Не удалось удалить статус',
 ];
