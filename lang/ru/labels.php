@@ -27,7 +27,7 @@ return [
     'Update label' => 'Обновить метку',
     'Update' => 'Обновить',
     'Label created successfully' => 'Метка успешно создана',
-    'Label changed successfully' => 'Метка успешно обновлена',
+    'Label changed successfully' => 'Метка успешно изменена',
     'Failed to delete label' => 'Не удалось удалить метку',
     'Label deleted successfully' => 'Метка успешно удалена',
 ];

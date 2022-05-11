@@ -32,6 +32,6 @@ return [
     'Changing a task' => 'Изменение задачи',
     'Update' => 'Обновить',
     'Task created successfully' => 'Задача успешно создана',
-    'Task changed successfully' => 'Задача успешно обновлена',
+    'Task changed successfully' => 'Задача успешно изменена',
     'Task deleted successfully' => 'Задача успешно удалена'
 ];
