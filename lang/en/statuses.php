@@ -24,4 +24,8 @@ return [
     'Edit' => 'Edit',
     'Are you sure?' => 'Are you sure?',
     'Edit status' => 'Edit status',
+    'Status created successfully' => 'Status created successfully',
+    'Status changed successfully' => 'Status changed successfully',
+    'Status deleted successfully' => 'Status deleted successfully',
+    'Failed to delete status' => 'Failed to delete status',
 ];
