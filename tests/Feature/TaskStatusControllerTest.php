@@ -14,6 +14,8 @@ class TaskStatusControllerTest extends TestCase
     use WithFaker;
     use RefreshDatabase;
 
+    private mixed $user;
+
     public function setUp(): void
     {
         parent::setUp();

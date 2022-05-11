@@ -16,9 +16,9 @@ class LabelPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return true;
     }
 
     /**
@@ -28,9 +28,9 @@ class LabelPolicy
      * @param  \App\Models\Label  $label
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Label $label)
+    public function view(User $user, Label $label): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return true;
     }
 
     /**
@@ -39,9 +39,9 @@ class LabelPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return true;
     }
 
     /**
@@ -51,9 +51,9 @@ class LabelPolicy
      * @param  \App\Models\Label  $label
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Label $label)
+    public function update(User $user, Label $label): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return true;
     }
 
     /**
@@ -63,9 +63,9 @@ class LabelPolicy
      * @param  \App\Models\Label  $label
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Label $label)
+    public function delete(User $user, Label $label): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return true;
     }
 
     /**
@@ -75,9 +75,9 @@ class LabelPolicy
      * @param  \App\Models\Label  $label
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Label $label)
+    public function restore(User $user, Label $label): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return false;
     }
 
     /**
@@ -87,8 +87,8 @@ class LabelPolicy
      * @param  \App\Models\Label  $label
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Label $label)
+    public function forceDelete(User $user, Label $label): \Illuminate\Auth\Access\Response|bool
     {
-        //
+        return false;
     }
 }
