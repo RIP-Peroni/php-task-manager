@@ -30,6 +30,8 @@ class TaskStatusControllerTest extends TestCase
 
     public function testCreate()
     {
+        $responseWithoutAuth = $this->get(route('task_statuses.create'));
+        $responseWithoutAuth->assertStatus(403);
         $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
         $response->assertOk();
     }
@@ -47,6 +49,8 @@ class TaskStatusControllerTest extends TestCase
     public function testEdit()
     {
         $taskStatus = TaskStatus::factory()->create();
+        $responseWithoutAuth = $this->get(route('task_statuses.edit', $taskStatus));
+        $responseWithoutAuth->assertStatus(403);
         $response = $this->actingAs($this->user)->get(route('task_statuses.edit', $taskStatus));
         $response->assertOk();
     }
@@ -55,6 +59,8 @@ class TaskStatusControllerTest extends TestCase
     {
         $taskStatus = TaskStatus::factory()->create();
         $otherName = TaskStatus::factory()->make()->only(['name']);
+        $responseWithoutAuth = $this->patch(route('task_statuses.update', ['task_status' => $taskStatus]), $otherName);
+        $responseWithoutAuth->assertStatus(403);
         $response = $this
             ->actingAs($this->user)
             ->patch(route('task_statuses.update', ['task_status' => $taskStatus]), $otherName);

@@ -29,6 +29,8 @@ class LabelControllerTest extends TestCase
 
     public function testCreate()
     {
+        $responseWithoutAuth = $this->get(route('labels.create'));
+        $responseWithoutAuth->assertStatus(403);
         $response = $this->actingAs($this->user)->get(route('labels.create'));
         $response->assertOk();
     }
@@ -46,6 +48,8 @@ class LabelControllerTest extends TestCase
     public function testEdit()
     {
         $label = Label::factory()->create();
+        $responseWithoutAuth = $this->get(route('labels.edit', $label));
+        $responseWithoutAuth->assertStatus(403);
         $response = $this->actingAs($this->user)->get(route('labels.edit', $label));
         $response->assertOk();
     }
@@ -54,6 +58,8 @@ class LabelControllerTest extends TestCase
     {
         $label = Label::factory()->create();
         $otherName = Label::factory()->make()->only(['name']);
+        $responseWithoutAuth = $this->patch(route('labels.update', ['label' => $label]), $otherName);
+        $responseWithoutAuth->assertStatus(403);
         $response = $this
             ->actingAs($this->user)
             ->patch(route('labels.update', ['label' => $label]), $otherName);
