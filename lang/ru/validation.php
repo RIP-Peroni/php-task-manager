@@ -106,7 +106,7 @@ return [
     'prohibited_unless' => ':Attribute поле запрещено до тех пор, пока :other присутствует в :values.',
     'prohibits' => ':Attribute поле запрещает :other присутствовать.',
     'regex' => ':Attribute формат не валиден.',
-    'required' => ':Attribute требуется.',
+    'required' => 'Это обязательное поле',
     'required_array_keys' => ':Attribute поле должно содержать записи для: :values.',
     'required_if' => ':Attribute поле требуется кода :other является :value.',
     'required_unless' => ':Attribute поле требуется до тех пор, пока :other присутствует в :values.',
