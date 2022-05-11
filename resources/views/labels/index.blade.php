@@ -24,7 +24,7 @@
                     <td>{{ $label->id }}</td>
                     <td>{{ $label->name }}</td>
                     <td>{{ $label->description }}</td>
-                    <td>{{ $label->created_at }}</td>
+                    <td>{{ $label->created_at->format('d.m.Y') }}</td>
                     @if (Auth::check())
                         <td>
                             {{ link_to_route('labels.destroy', __('labels.Delete'), ['label' => $label],

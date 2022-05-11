@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ $status->id }}</td>
                     <td>{{ $status->name }}</td>
-                    <td>{{ $status->created_at }}</td>
+                    <td>{{ $status->created_at->format('d.m.Y') }}</td>
                     @if (Auth::check())
                         <td>
                             {{ link_to_route('task_statuses.destroy', __('statuses.Delete'), ['task_status' => $status],
