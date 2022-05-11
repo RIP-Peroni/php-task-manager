@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LabelFormRequest;
 use App\Models\Label;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class LabelController extends Controller
@@ -12,9 +17,9 @@ class LabelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $labels = Label::query()->orderBy('created_at')->get();
         return view('labels.index', compact('labels'));
@@ -23,9 +28,9 @@ class LabelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -37,10 +42,10 @@ class LabelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param LabelFormRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(LabelFormRequest $request)
+    public function store(LabelFormRequest $request): Redirector|Application|RedirectResponse
     {
         $data = $request->validated();
         Label::query()->create($data);
@@ -52,10 +57,10 @@ class LabelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Label  $label
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Label $label
+     * @return Application|Factory|View
      */
-    public function edit(Label $label)
+    public function edit(Label $label): View|Factory|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -66,11 +71,11 @@ class LabelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Label  $label
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param LabelFormRequest $request
+     * @param Label $label
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(LabelFormRequest $request, Label $label)
+    public function update(LabelFormRequest $request, Label $label): Redirector|RedirectResponse|Application
     {
         if (!Auth::check()) {
             abort(403);
@@ -83,10 +88,10 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Label $label
+     * @return RedirectResponse
      */
-    public function destroy(Label $label)
+    public function destroy(Label $label): RedirectResponse
     {
         if ($label->tasks()->exists()) {
             flash(__('labels.Failed to delete label'))->error();
