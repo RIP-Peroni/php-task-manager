@@ -36,15 +36,18 @@
                     <ul class="navbar-nav me-auto">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link " href="{{ route('tasks.index') }}">
+                                <a class="nav-link {{ Route::is('tasks.index') ? 'active' : '' }}"
+                                   href="{{ route('tasks.index') }}">
                                     {{ __('tasks.Tasks') }}                            </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="{{ route('task_statuses.index') }}">
+                                <a class="nav-link {{ Route::is('task_statuses.index') ? 'active' : '' }}"
+                                   href="{{ route('task_statuses.index') }}">
                                     {{ __('statuses.Statuses') }}                            </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="{{ route('labels.index') }}">
+                                <a class="nav-link {{ Route::is('labels.index') ? 'active' : '' }}"
+                                   href="{{ route('labels.index') }}">
                                     {{ __('labels.Labels') }}                            </a>
                             </li>
                         </ul>
@@ -90,20 +93,18 @@
         </nav>
 
         <main class="container py-4">
-{{--            @if ($errors->any())--}}
-{{--                <div class="alert alert-danger" role="alert">--}}
-{{--                    @foreach ($errors->all() as $error)--}}
-{{--                        {{ $error }}--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            @endif--}}
-            @if (Session::has('success'))
-                <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
-            @endif
             @include('flash::message')
 
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.nav-link').click(function(){
+                $('.nav-link').removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
 </body>
 </html>
