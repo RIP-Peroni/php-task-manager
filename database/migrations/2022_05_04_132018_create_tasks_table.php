@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->foreignId("status_id")->constrained('task_statuses')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId("created_by_id")->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->bigInteger("assigned_to_id")->nullable();
+            $table->unsignedBigInteger("assigned_to_id")->nullable();
             $table->foreign("assigned_to_id")->references('id')->on('users');
             $table->timestamps();
         });

@@ -15,7 +15,8 @@
         "laravelcollective/html": "^6.3",
         "rollbar/rollbar-laravel": "^7.2",
         "spatie/laravel-query-builder": "^5.0",
-        "fakerphp/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "laravel/sail": "^1.0.1",
