@@ -12,10 +12,10 @@ Description
 ***
 ### Setup
 ```
-git  clone https://github.com/RIP-Peroni/php-project-lvl4.git
+git  clone https://github.com/RIP-Peroni/php-task-manager.git
 ```
 ```
-cd php-project-lvl4
+cd php-task-manager
 ```
 ```
 make setup
