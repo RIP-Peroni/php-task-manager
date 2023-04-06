@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install MySQL
+        run: sudo apt-get update && sudo apt-get install -y mysql-server
       - name: Install composer dependencies
-        run: make setup
-      - name: Create temporary sqlite database
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          make setup
+          composer require --dev illuminate/testing
       - name: Run unit tests via PHPUnit
         run: make test
       - name: Show test coverage
@@ -22,7 +22,7 @@ jobs:
           XDEBUG_MODE: coverage
         with:
           coverageCommand: make test-coverage
-          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
+          coverageLocations: ${{ github.workspace }}/build/logs/clover.xml:clover
           debug: true
       - name: Check lint via PHP CodeSniffer
         run: make lint
